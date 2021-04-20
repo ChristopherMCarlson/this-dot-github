@@ -1,60 +1,47 @@
 <template>
-  <v-app>
+  <v-app id="inspire">
     <v-app-bar
       app
-      color="primary"
       dark
+      flat
     >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
+    <v-icon large>mdi-github</v-icon>
+      <v-avatar
+        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
+        size="32"
+      ></v-avatar>
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
         text
+        small
+        v-for="link in links"
+        :key="link"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        {{ link }}
       </v-btn>
+
     </v-app-bar>
 
-    <v-main>
-      <HelloWorld/>
+    <v-main class="grey lighten-3">
+      <v-container>
+        <v-row>
+          <v-col cols='12'>
+            <router-view />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+  export default {
+    data: () => ({
+      links: [
+        'Pull Requests',
+        'Issues',
+        'Marketplace',
+        'Explore',
+      ],
+    }),
+  }
 </script>
