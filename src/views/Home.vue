@@ -14,10 +14,12 @@
               placeholder="Search Github"
               single-line
               outlined
+              v-model = 'searchString'
+              @submit="searchUsers"
             ></v-text-field>
           </v-col>
           <v-col cols='1'>
-            <v-btn min-height='56px'>Search</v-btn>
+            <v-btn min-height='56px' @click="searchUsers">Search</v-btn>
           </v-col>
         </v-row>
       </v-col>
@@ -27,7 +29,15 @@
 
 <script>
   export default {
-    
+    data:() => ({
+      searchString: '',
+    }),
+    methods: {
+      searchUsers: function(){
+        console.log(this.searchString);
+        this.$store.dispatch('searchUsers', this.searchString);
+      }
+    }
   }
 </script>
 
