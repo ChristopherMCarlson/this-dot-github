@@ -8,19 +8,20 @@
       </v-col>
       <v-col cols='8' class='text-center'>
         <v-row class='justify-center'>
-          <v-col cols='11'>
-            <v-text-field
-              label="Search Github"
-              placeholder="Search Github"
-              single-line
-              outlined
-              v-model = 'searchString'
-              @submit="searchUsers"
-            ></v-text-field>
-          </v-col>
-          <v-col cols='1'>
-            <v-btn min-height='56px' @click="searchUsers">Search</v-btn>
-          </v-col>
+          <v-form v-on:submit.prevent='searchUsers'>
+            <v-col cols='11'>
+              <v-text-field
+                label="Search Github"
+                placeholder="Search Github"
+                single-line
+                outlined
+                v-model = 'searchString'
+              ></v-text-field>
+            </v-col>
+            <v-col cols='1'>
+              <v-btn min-height='56px' type='submit'>Search</v-btn>
+            </v-col>
+          </v-form>
         </v-row>
       </v-col>
     </v-row>
@@ -34,8 +35,12 @@
     }),
     methods: {
       searchUsers: function(){
-        console.log(this.searchString);
-        this.$store.dispatch('searchUsers', this.searchString);
+        var searchObject = {
+          searchString: this.searchString,
+          per_page: 10,
+          pageNumber: 1
+        }
+        this.$store.dispatch('searchUsers', searchObject);
       }
     }
   }

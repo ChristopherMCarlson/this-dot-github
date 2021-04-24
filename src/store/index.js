@@ -14,23 +14,37 @@ const gitAPI = axios.create({
 });
 export default new Vuex.Store({
   state: {
-    searchResults: [],
+    searchResults: null,
+    searchString: '',
+    page: 1,
+    per_page: 10
   },
   mutations: {
     setSearchResults(state, results){
       state.searchResults = results;
     },
+    setSearchString(state, string){
+      state.searchString = string;
+    },
+    setPageNumber(state, number){
+      state.page = number;
+    },
+    setPerPage(state, number){
+      state.per_page = number;
+    }
   },
   actions: {
-    searchUsers({commit}, searchString){
-      console.log(searchString)
-      gitAPI.get('/search/users?q=' + searchString)
+    searchUsers({commit}, searchObject){
+      console.log(searchObject);
+      gitAPI.get('/search/users?q=' + searchObject.searchString + '&per_page=' + searchObject.per_page + '&page=' + searchObject.pageNumber)
         .then(res => {
           commit('setSearchResults', res.data);
-          console.log(res.data);
-          router.push({ name: 'searchResults' })
+          commit('setSearchString', searchObject.searchString);
+          commit('setPageNumber', searchObject.pageNumber);
+          commit('setPerPage', searchObject.per_page);
+          router.push({ name: 'searchResults', query: {q: searchObject.searchString, per_page: searchObject.per_page, page: searchObject.pageNumber} })
         });
-    }
+    },
   },
   modules: {
   }

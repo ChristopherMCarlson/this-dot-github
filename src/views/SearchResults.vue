@@ -1,11 +1,11 @@
 <template>
   <v-container height='80vh'>
-    <v-row class='justify-space-around mt-5' align='center'>
+    <v-row class='justify-space-around mt-5' align='center' v-if='searchResults'>
       <v-col cols='8' class='text-start'>
-        <p>{{searchResults.total_count}} user(s)</p>
+        <p>{{searchResults ? searchResults.total_count : 0}} user(s)</p>
       </v-col>
       <v-col cols='8' class='text-center' v-for='result in searchResults.items' :key="result.id">
-        <v-row>
+        <v-row class='mb-2'>
           <v-col cols='1'>
             <v-avatar size="36">
               <img
@@ -17,13 +17,25 @@
           <v-col cols='10' class='text-start'>
             <a :href='result.html_url'>{{result.login}}</a>
           </v-col>
-          <v-col cols='1' class='text-center'>
+          <v-col cols='1' class='text-start'>
             <v-btn>Follow</v-btn>
           </v-col>
         </v-row>
+        <hr />
       </v-col>
     </v-row>
-  </v-container>
+    <v-row justify="center">
+      <v-col cols="8">
+        <v-container class="max-width">
+          <v-pagination
+            v-model="page"
+            class="my-4"
+            :length="searchResults ? (Math.ceil(searchResults.total_count/per_page)) : 1"
+          ></v-pagination>
+        </v-container>
+      </v-col>
+    </v-row>
+</v-container>
 </template>
 
 <script>
@@ -35,6 +47,23 @@
       searchResults() {
         return this.$store.state.searchResults
       },
+      page() {
+        return parseInt(this.$route.query.page)
+      },
+      per_page() {
+        return parseInt(this.$route.query.per_page)
+      }
+    },
+    created: function(){
+      if(!this.$store.state.searchResults){
+        console.log('No Search Results!')
+        var searchObject = {
+          searchString: this.$route.query.q,
+          per_page: this.$route.query.per_page,
+          pageNumber: this.$route.query.page 
+        }
+        this.$store.dispatch('searchUsers', searchObject);
+      }
     }
   }
 </script>
