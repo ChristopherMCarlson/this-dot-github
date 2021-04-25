@@ -15,7 +15,7 @@
             </v-avatar>
           </v-col>
           <v-col cols='10' class='text-start'>
-            <a :href='result.html_url'>{{result.login}}</a>
+            <a :href='result.html_url' target='_blank'>{{result.login}}</a>
           </v-col>
           <v-col cols='1' class='text-start'>
             <v-btn>Follow</v-btn>
