@@ -3,7 +3,7 @@
     <v-row class='justify-space-around mt-5' align='center'>
       <v-col cols='8' class='text-start'>
         <h2>
-          <v-icon>mdi-magnify</v-icon> Search more than 553M issues
+          <v-icon>mdi-magnify</v-icon> Search more than 40M users
         </h2>
       </v-col>
       <v-col cols='8' class='text-center'>

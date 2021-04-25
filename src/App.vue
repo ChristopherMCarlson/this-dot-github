@@ -16,9 +16,10 @@
         text
         small
         v-for="link in links"
-        :key="link"
+        :key="link.title"
+        v-on:click='openLink(link.link)'
       >
-        {{ link }}
+        {{ link.title }}
       </v-btn>
 
     </v-app-bar>
@@ -39,12 +40,26 @@
   export default {
     data: () => ({
       links: [
-        'Pull Requests',
-        'Issues',
-        'Marketplace',
-        'Explore',
+        {
+          title:'Pull Requests',
+          link: 'https://github.com/pulls'},
+        {
+          title:'Issues',
+          link: 'https://github.com/issues'},
+        {
+          title:'Marketplace',
+          link: 'https://github.com/marketplace'},
+        {
+          title:'Explore',
+          link: 'https://github.com/explore'},
       ],
     }),
+    methods: {
+      openLink(URL){
+        console.log(URL)
+        window.open(URL, '_blank');
+      }
+    }
   }
 </script>
 
