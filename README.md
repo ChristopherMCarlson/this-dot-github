@@ -1,24 +1,20 @@
-# this-dot-github
+# Github Searcher
 
-## Project setup
-```
-npm install
-```
+This application is built to search for users on Github
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Limitations
 
-### Compiles and minifies for production
-```
-npm run build
-```
+Due to GitHub search API limits, results are limited to the first 1000 results. Any query that returns more results will be truncated to 1000.
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Usage
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+There are two ways to use the application. The first is simply through the search bar on the main page. The second is to edit URL parameters.
+
+| Name     |Type           | Description                |
+|----------|---------------|----------------------------|
+| q        | String        | Keyword searcher           |
+| per_page | Interger      | Number of results per page |
+| page     | Interger      | Page number                |
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
