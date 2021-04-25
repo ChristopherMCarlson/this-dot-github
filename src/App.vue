@@ -5,7 +5,9 @@
       dark
       flat
     >
-    <v-icon large>mdi-github</v-icon>
+    <router-link to='home'>
+      <v-icon large>mdi-github</v-icon>
+    </router-link>
       <v-avatar
         :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
         size="32"
@@ -45,3 +47,10 @@
     }),
   }
 </script>
+
+<style>
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+</style>

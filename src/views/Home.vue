@@ -7,22 +7,22 @@
         </h2>
       </v-col>
       <v-col cols='8' class='text-center'>
-        <v-row class='justify-center'>
-          <v-form v-on:submit.prevent='searchUsers'>
-            <v-col cols='11'>
-              <v-text-field
-                label="Search Github"
-                placeholder="Search Github"
-                single-line
-                outlined
-                v-model = 'searchString'
-              ></v-text-field>
-            </v-col>
-            <v-col cols='1'>
-              <v-btn min-height='56px' type='submit'>Search</v-btn>
-            </v-col>
-          </v-form>
-        </v-row>
+        <v-form v-on:submit.prevent='searchUsers'>
+          <v-row class='justify-center'>
+              <v-col cols='11'>
+                <v-text-field
+                  label="Search Github"
+                  placeholder="Search Github"
+                  single-line
+                  outlined
+                  v-model = 'searchString'
+                ></v-text-field>
+              </v-col>
+              <v-col cols='1'>
+                <v-btn min-height='56px' type='submit'>Search</v-btn>
+              </v-col>
+          </v-row>
+        </v-form>
       </v-col>
     </v-row>
   </v-container>

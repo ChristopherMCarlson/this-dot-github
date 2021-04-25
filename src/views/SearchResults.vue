@@ -2,7 +2,7 @@
   <v-container height='80vh'>
     <v-row class='justify-space-around mt-5' align='center' v-if='searchResults'>
       <v-col cols='8' class='text-start'>
-        <p>{{searchResults ? searchResults.total_count : 0}} user(s)</p>
+        <p>{{searchResults ? (searchResults.total_count <= 1000 ? searchResults.total_count : 1000) : 0}} user(s)</p>
       </v-col>
       <v-col cols='8' class='text-center' v-for='result in searchResults.items' :key="result.id">
         <v-row class='mb-2'>
@@ -30,7 +30,7 @@
           <v-pagination
             v-model="page"
             class="my-4"
-            :length="searchResults ? (Math.ceil(searchResults.total_count/per_page)) : 1"
+            :length="searchResults ? (searchResults.total_count <= 1000 ? (Math.ceil(searchResults.total_count/per_page)) : 100) : 1"
           ></v-pagination>
         </v-container>
       </v-col>
@@ -47,8 +47,18 @@
       searchResults() {
         return this.$store.state.searchResults
       },
-      page() {
-        return parseInt(this.$route.query.page)
+      page: {
+        get: function (){
+          return parseInt(this.$route.query.page)
+        },
+        set: function (newPage){
+        var searchObject = {
+          searchString: this.$route.query.q,
+          per_page: this.$route.query.per_page,
+          pageNumber: newPage 
+        }
+        this.$store.dispatch('searchUsers', searchObject);
+        }
       },
       per_page() {
         return parseInt(this.$route.query.per_page)

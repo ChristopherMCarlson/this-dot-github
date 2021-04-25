@@ -43,7 +43,7 @@ export default new Vuex.Store({
           commit('setPageNumber', searchObject.pageNumber);
           commit('setPerPage', searchObject.per_page);
           router.push({ name: 'searchResults', query: {q: searchObject.searchString, per_page: searchObject.per_page, page: searchObject.pageNumber} })
-        });
+        })
     },
   },
   modules: {
