@@ -2,7 +2,7 @@
   <v-container height='80vh'>
     <v-row class='justify-space-around mt-5' align='center' v-if='searchResults'>
       <v-col cols='8' class='text-start'>
-        <p>{{searchResults ? (searchResults.total_count <= 1000 ? searchResults.total_count : 1000) : 0}} user(s)</p>
+        <p>{{searchResults ? (searchResults.total_count &lt; 1000 ? searchResults.total_count : 1000) : 0}} user(s)</p>
       </v-col>
       <v-col cols='8' class='text-center' v-for='result in searchResults.items' :key="result.id">
         <v-row class='mb-2'>
